@@ -82,20 +82,6 @@ def processar_arquivo_taxas(path):
         df.loc[df['Moeda'] == 'GBP', 'Paridade_Compra'] = 1 / df.loc[df['Moeda'] == 'GBP', 'Paridade_Compra']
         df.loc[df['Moeda'] == 'GBP', 'Paridade_Venda'] = 1 / df.loc[df['Moeda'] == 'GBP', 'Paridade_Venda']
 
-    if "HKD" in df["Moeda"].unique():
-        df.loc[df["Moeda"] == "HKD", "Taxa_Compra"] = (
-            1 / df.loc[df["Moeda"] == "HKD", "Taxa_Compra"]
-        )
-        df.loc[df["Moeda"] == "HKD", "Taxa_Venda"] = (
-            1 / df.loc[df["Moeda"] == "HKD", "Taxa_Venda"]
-        )
-        df.loc[df["Moeda"] == "HKD", "Paridade_Compra"] = (
-            1 / df.loc[df["Moeda"] == "HKD", "Paridade_Compra"]
-        )
-        df.loc[df["Moeda"] == "HKD", "Paridade_Venda"] = (
-            1 / df.loc[df["Moeda"] == "HKD", "Paridade_Venda"]
-        )
-
     return df
 
 
