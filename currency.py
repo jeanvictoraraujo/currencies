@@ -1,6 +1,7 @@
 # %%
 import pandas as pd
 import requests
+import plotly.express as px
 
 # # Defina o intervalo de datas de início e fim
 # data_inicio = "01/01/2023"
@@ -154,6 +155,7 @@ resultado = resultado.rename(columns={"Paridade_Venda": "taxa_media_mes"})
 
 # %%
 
+import plotly.express as px
 import streamlit as st
 
 st.title("Consulta de Taxas de Fechamento e Média")
@@ -177,5 +179,24 @@ if not df_filtrado.empty:
     st.write(
         f"Taxa de Fechamento para {moeda_selecionada} no mês {mes_selecionado}: {df_filtrado['taxa_fechamento_mes'].values[0]}"
     )
+
+    # Gráfico de Evolução da Moeda (Taxa de Fechamento e Média)
+    df_moeda = resultado[resultado["Moeda"] == moeda_selecionada]
+
+    # Converte a coluna 'Ano_Mes' para string para evitar o erro de serialização com Period
+    df_moeda["Ano_Mes"] = df_moeda["Ano_Mes"].astype(str)
+
+    # Criar gráfico com duas linhas: uma para a taxa média e outra para a taxa de fechamento
+    fig = px.line(
+        df_moeda,
+        x="Ano_Mes",
+        y=["taxa_media_mes", "taxa_fechamento_mes"],
+        title=f"Evolução das Taxas de {moeda_selecionada}",
+        labels={"Ano_Mes": "Mês", "value": "Taxa", "variable": "Tipo de Taxa"},
+    )
+
+    # Exibindo o gráfico
+    st.plotly_chart(fig)
+
 else:
     st.write(f"Não há dados para {moeda_selecionada} no mês {mes_selecionado}.")
