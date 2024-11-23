@@ -179,6 +179,3 @@ if not df_filtrado.empty:
     )
 else:
     st.write(f"Não há dados para {moeda_selecionada} no mês {mes_selecionado}.")
-
-# %%
-resultado
