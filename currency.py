@@ -2,31 +2,31 @@
 import pandas as pd
 import requests
 
-# Defina o intervalo de datas de início e fim
-data_inicio = "01/01/2023"
-data_fim = "31/10/2024"
+# # Defina o intervalo de datas de início e fim
+# data_inicio = "01/01/2023"
+# data_fim = "31/10/2024"
 
-# URLs para as moedas (ajuste o intervalo de datas)
-urls = [
-    f"https://ptax.bcb.gov.br/ptax_internet/consultaBoletim.do?method=gerarCSVFechamentoMoedaNoPeriodo&ChkMoeda=61&DATAINI={data_inicio}&DATAFIM={data_fim}",
-    f"https://ptax.bcb.gov.br/ptax_internet/consultaBoletim.do?method=gerarCSVFechamentoMoedaNoPeriodo&ChkMoeda=57&DATAINI={data_inicio}&DATAFIM={data_fim}",
-    f"https://ptax.bcb.gov.br/ptax_internet/consultaBoletim.do?method=gerarCSVFechamentoMoedaNoPeriodo&ChkMoeda=115&DATAINI={data_inicio}&DATAFIM={data_fim}",
-    f"https://ptax.bcb.gov.br/ptax_internet/consultaBoletim.do?method=gerarCSVFechamentoMoedaNoPeriodo&ChkMoeda=158&DATAINI={data_inicio}&DATAFIM={data_fim}",
-    f"https://ptax.bcb.gov.br/ptax_internet/consultaBoletim.do?method=gerarCSVFechamentoMoedaNoPeriodo&ChkMoeda=159&DATAINI={data_inicio}&DATAFIM={data_fim}",
-]
+# # URLs para as moedas (ajuste o intervalo de datas)
+# urls = [
+#     f"https://ptax.bcb.gov.br/ptax_internet/consultaBoletim.do?method=gerarCSVFechamentoMoedaNoPeriodo&ChkMoeda=61&DATAINI={data_inicio}&DATAFIM={data_fim}",
+#     f"https://ptax.bcb.gov.br/ptax_internet/consultaBoletim.do?method=gerarCSVFechamentoMoedaNoPeriodo&ChkMoeda=57&DATAINI={data_inicio}&DATAFIM={data_fim}",
+#     f"https://ptax.bcb.gov.br/ptax_internet/consultaBoletim.do?method=gerarCSVFechamentoMoedaNoPeriodo&ChkMoeda=115&DATAINI={data_inicio}&DATAFIM={data_fim}",
+#     f"https://ptax.bcb.gov.br/ptax_internet/consultaBoletim.do?method=gerarCSVFechamentoMoedaNoPeriodo&ChkMoeda=158&DATAINI={data_inicio}&DATAFIM={data_fim}",
+#     f"https://ptax.bcb.gov.br/ptax_internet/consultaBoletim.do?method=gerarCSVFechamentoMoedaNoPeriodo&ChkMoeda=159&DATAINI={data_inicio}&DATAFIM={data_fim}",
+# ]
 
-# Baixar os arquivos CSV
-for url in urls:
-    response = requests.get(url)
-    moeda = url.split("ChkMoeda=")[1].split("&")[0]
+# # Baixar os arquivos CSV
+# for url in urls:
+#     response = requests.get(url)
+#     moeda = url.split("ChkMoeda=")[1].split("&")[0]
 
-    # Criar nome do arquivo, substituindo as barras (/) por hífens (-)
-    nome_arquivo = f"taxas_cambio_{moeda}_{data_inicio.replace('/', '-')}_to_{data_fim.replace('/', '-')}.csv"
+#     # Criar nome do arquivo, substituindo as barras (/) por hífens (-)
+#     nome_arquivo = f"taxas_cambio_{moeda}_{data_inicio.replace('/', '-')}_to_{data_fim.replace('/', '-')}.csv"
 
-    with open(nome_arquivo, "wb") as file:
-        file.write(response.content)
+#     with open(nome_arquivo, "wb") as file:
+#         file.write(response.content)
 
-    print(f"Arquivo para {moeda} baixado com sucesso!")
+#     print(f"Arquivo para {moeda} baixado com sucesso!")
 
 # Função para processar cada arquivo
 def processar_arquivo_taxas(path):
